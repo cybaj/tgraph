@@ -3,9 +3,11 @@ import TNode from '../node';
 class Graph<ContentType>{
   // An adjacency list to hold our graph data
   private _adjList: TNode<ContentType>[];
+  private _adjMatrix: boolean[][];
 
   constructor() {
       this._adjList = [];
+      this._adjMatrix = []; // [TODO] adjacency matrix 
   }
 
   /**
