@@ -37,9 +37,13 @@ class Graph<ContentType> {
         // Do not worry about handling invalid indexes or any other error cases.
         // We will assume all tnodes are valid and already exist.
 
-        // Add an tnode2 to tnode1 edges.
-        this._adjList.find((e) => e.name === tnode1)?.edges.push(tnode2);
+        // [NOTICE]
+        // directed graph is assumed for q ancestries
+        // // Add an tnode2 to tnode1 edges.
+        // this._adjList.find((e) => e.name === tnode1)?.edges.push(tnode2);
 
+        // [NOTICE]
+        // direction which is from descendant to ancestry is assumed for q ancestries
         // Add an tnode1 to tnode2 edges.
         this._adjList.find((e) => e.name === tnode2)?.edges.push(tnode1);
         return true;
@@ -55,12 +59,16 @@ class Graph<ContentType> {
         // Do not worry about handling invalid indexes or any other error cases.
         // We will assume all tnodes are valid and already exist.
 
-        // Remove tnode2 from the edges of tnode1
-        const foundTNode1 = this._adjList.find((e) => e.name === tnode1);
-        if (foundTNode1) {
-            foundTNode1.edges = foundTNode1.edges.filter((v) => v !== tnode2);
-        }
+        // [NOTICE]
+        // directed graph is assumed for q ancestries
+        // // Remove tnode2 from the edges of tnode1
+        // const foundTNode1 = this._adjList.find((e) => e.name === tnode1);
+        // if (foundTNode1) {
+        //     foundTNode1.edges = foundTNode1.edges.filter((v) => v !== tnode2);
+        // }
 
+        // [NOTICE]
+        // direction which is from descendant to ancestry is assumed for q ancestries
         // Remove tnode1 from the edges of tnode2
         const foundTNode2 = this._adjList.find((e) => e.name === tnode2);
         if (foundTNode2) {
