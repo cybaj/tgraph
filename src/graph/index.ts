@@ -16,20 +16,29 @@ class Graph<ContentType, EdgeType> {
 
     /**
      */
-    initGraph(newTNode: TNode<ContentType, EdgeType>): boolean {
+    initGraph(newTNode: TNode<ContentType, EdgeType>): boolean;
+    initGraph(newTNodeArr?: TNode<ContentType, EdgeType>[]): boolean;
+    initGraph(newTNodeOrArr: any): boolean {
         // We will keep the implementation simple and focus on the concepts
 
-        // If the tnode already exists in edges, do nothing.
-        if (this._adjList.find((e) => e.name.endsWith(FROM + newTNode.name))) {
-            return true;
+        if (newTNodeOrArr?.length > 0) {
+          const newTNodeArr = newTNodeOrArr;
+          this._nodes.concat(newTNodeArr);
         }
-        
-        // If the tnode already exists, do nothing.
-        if (this._nodes.find((n) => n.name === newTNode.name)) {
-            return true;
-        }
+        if (newTNodeOrArr?.name) {
+          const newTNode = newTNodeOrArr;
+          // If the tnode already exists in edges, do nothing.
+          if (this._adjList.find((e) => e.name.endsWith(FROM + newTNode.name))) {
+              return true;
+          }
+          
+          // If the tnode already exists, do nothing.
+          if (this._nodes.find((n) => n.name === newTNode.name)) {
+              return true;
+          }
 
-        this._nodes.push(newTNode);
+          this._nodes.push(newTNode);
+          }
         return true;
     }
 
