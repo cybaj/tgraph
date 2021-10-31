@@ -52,6 +52,9 @@ class Graph<ContentType, EdgeType> {
         if (this._adjList.find((e) => e.name === descendant + FROM + ancestry)) return true;
 
         this._adjList.push(new TEdge(descendant, ancestry));
+
+        if (!this._nodes.find((v) => v.name === descendant.name)) this._nodes.push(descendant)
+        if (!this._nodes.find((v) => v.name === ancestry.name)) this._nodes.push(ancestry)
         return true;
     }
 

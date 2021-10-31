@@ -1,4 +1,4 @@
-class TNode<ContentType, EdgeType = {}> {
+export class TNode<ContentType, EdgeType = {}> {
     // Name of the node.
     private _name: string;
     public get name(): string {

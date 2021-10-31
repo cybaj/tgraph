@@ -1,8 +1,8 @@
 import type TNode from "../node"
 export const FROM = "&&"
 
-interface ITEdge<ContentType, EdgeType> {
-  name: string, ancestry: TNode<ContentType, EdgeType>, descendant: TNode<ContentType, EdgeType>
+export interface ITEdge<ContentType, EdgeType> {
+  name: string, ancestry?: TNode<ContentType, EdgeType>, descendant?: TNode<ContentType, EdgeType>
 }
 
 class TEdge<ContentType, EdgeType = {}> implements ITEdge<ContentType, EdgeType> {
@@ -16,23 +16,24 @@ class TEdge<ContentType, EdgeType = {}> implements ITEdge<ContentType, EdgeType>
     }
 
     // Name of the ancestry.
-    private _ancestry: TNode<ContentType, EdgeType>;
-    public get ancestry(): TNode<ContentType, EdgeType> {
-        return this._ancestry;
+    private _ancestry?: TNode<ContentType, EdgeType> | undefined;
+    public get ancestry(): TNode<ContentType, EdgeType> | undefined{
+        if (this._ancestry) return this._ancestry;
+        return undefined;
     }
-    public set ancestry(v: TNode<ContentType, EdgeType>) {
+    public set ancestry(v: TNode<ContentType, EdgeType> | undefined) {
         this._ancestry = v;
     }
 
     // Name of the descendant.
-    private _descendant: TNode<ContentType, EdgeType>;
-    public get descendant(): TNode<ContentType, EdgeType> {
-        return this._descendant;
+    private _descendant?: TNode<ContentType, EdgeType>;
+    public get descendant(): TNode<ContentType, EdgeType> | undefined{
+        if (this._descendant) return this._descendant;
+        return undefined;
     }
-    public set descendant(v: TNode<ContentType, EdgeType>) {
+    public set descendant(v: TNode<ContentType, EdgeType> | undefined) {
         this._descendant = v;
     }
-
 
     /**
      * Creates a new vertex with empty edges.
