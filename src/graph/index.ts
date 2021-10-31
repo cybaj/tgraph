@@ -1,38 +1,42 @@
 import TNode from '../node';
+import TEdge, {FROM} from '../edge';
 
 // [TODO] add getNodes and getEdges
-class Graph<ContentType> {
+class Graph<ContentType, EdgeType> {
     // An adjacency list to hold our graph data
-    private _adjList: TNode<ContentType>[];
+    private _adjList: TEdge<ContentType, EdgeType>[];
     // private _adjMatrix: boolean[][];
+    private _nodes: TNode<ContentType, EdgeType>[];
 
     constructor() {
         this._adjList = [];
         // this._adjMatrix = []; // [TODO] adjacency matrix
+        this._nodes = [];
     }
 
     /**
-     * A method to add a new tnode to the graph.
-     * @param new TNode Name of the tnode to be added to the graph
      */
-    addTNode(newTNode: TNode<ContentType>): boolean {
+    initGraph(newTNode: TNode<ContentType, EdgeType>): boolean {
         // We will keep the implementation simple and focus on the concepts
 
+        // If the tnode already exists in edges, do nothing.
+        if (this._adjList.find((e) => e.name.endsWith(FROM + newTNode.name))) {
+            return true;
+        }
+        
         // If the tnode already exists, do nothing.
-        if (this._adjList.find((e) => e.name === newTNode.name)) {
+        if (this._nodes.find((n) => n.name === newTNode.name)) {
             return true;
         }
 
-        this._adjList.push(newTNode);
+        this._nodes.push(newTNode);
         return true;
     }
 
     /**
      * Adds an edge to the graph.
-     * @param tnode1 One of the tnodes between an edge
-     * @param tnode2 Another tnode of an edge
      */
-    addAnEdge(tnode1: string, tnode2: string): boolean {
+    addAnEdge(descendant: TNode<ContentType, EdgeType>, ancestry: TNode<ContentType, EdgeType>): boolean {
         // We will keep the implementation simple and focus on the concepts
         // Do not worry about handling invalid indexes or any other error cases.
         // We will assume all tnodes are valid and already exist.
@@ -45,7 +49,9 @@ class Graph<ContentType> {
         // [NOTICE]
         // direction which is from descendant to ancestry is assumed for q ancestries
         // Add an tnode1 to tnode2 edges.
-        this._adjList.find((e) => e.name === tnode2)?.edges.push(tnode1);
+        if (this._adjList.find((e) => e.name === descendant + FROM + ancestry)) return true;
+
+        this._adjList.push(new TEdge(descendant, ancestry));
         return true;
     }
 
@@ -54,7 +60,7 @@ class Graph<ContentType> {
      * @param tnode1 One of the tnode of an edge to be removed
      * @param tnode2 ANother tnode of an edge to be removed
      */
-    removeAnEdge(tnode1: string, tnode2: string): boolean {
+    removeAnEdge(descendant: TNode<ContentType, EdgeType>, ancestry: TNode<ContentType, EdgeType>): boolean {
         // We will keep the implementation simple and focus on the concepts
         // Do not worry about handling invalid indexes or any other error cases.
         // We will assume all tnodes are valid and already exist.
@@ -70,9 +76,21 @@ class Graph<ContentType> {
         // [NOTICE]
         // direction which is from descendant to ancestry is assumed for q ancestries
         // Remove tnode1 from the edges of tnode2
-        const foundTNode2 = this._adjList.find((e) => e.name === tnode2);
-        if (foundTNode2) {
-            foundTNode2.edges = foundTNode2.edges.filter((v) => v !== tnode1);
+        const foundEdge = this._adjList.find((e) => e.name === descendant + FROM + ancestry.name);
+        if (foundEdge) {
+            this._adjList = this._adjList.filter((e) => e !== foundEdge);
+        }
+        if (!foundEdge || 
+          (!this._adjList.find((e) => e.name.endsWith(FROM + descendant.name ))
+            && !(this._adjList.find((e) => e.name.startsWith(descendant.name + FROM)))
+          )) {
+            this._nodes.filter((v) => v !== descendant);
+        }
+        if (!foundEdge || 
+          (!this._adjList.find((e) => e.name.endsWith(FROM + ancestry.name ))
+            && !(this._adjList.find((e) => e.name.startsWith(ancestry.name + FROM)))
+          )) {
+            this._nodes.filter((v) => v !== ancestry);
         }
 
         return true;

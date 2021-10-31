@@ -1,4 +1,4 @@
-class TNode<ContentType> {
+class TNode<ContentType, EdgeType = {}> {
     // Name of the node.
     private _name: string;
     public get name(): string {
@@ -9,11 +9,11 @@ class TNode<ContentType> {
     }
 
     // Edges associated with the node
-    private _edges: string[];
-    public get edges(): string[] {
+    private _edges: EdgeType[];
+    public get edges(): EdgeType[] {
         return this._edges;
     }
-    public set edges(v: string[]) {
+    public set edges(v: EdgeType[]) {
         this._edges = v;
     }
 
