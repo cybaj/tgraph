@@ -8,6 +8,16 @@ export class TNode<ContentType, EdgeType = {}> {
         this._name = v;
     }
 
+    // Category of the node.
+    private _category: string | undefined;
+    public get category(): string | undefined {
+        if (this._category) return this._category;
+        return undefined
+    }
+    public set category(v: string | undefined) {
+        this._category = v;
+    }
+
     // Edges associated with the node
     private _edges: EdgeType[];
     public get edges(): EdgeType[] {
@@ -30,10 +40,11 @@ export class TNode<ContentType, EdgeType = {}> {
      * Creates a new vertex with empty edges.
      * @param TNName Name of the node
      */
-    constructor(TNName: string, TNContent: ContentType) {
+    constructor(TNName: string, TNContent: ContentType, category?: string) {
         this._name = TNName;
         this._edges = [];
         this._content = TNContent;
+        this._category = category;
     }
 }
 
