@@ -8,7 +8,7 @@ import type {TNode} from "../node"
 export function getTerminals<ContentType, EdgeType> (edges: ITEdge<ContentType, EdgeType>[], nodes: TNode<ContentType, EdgeType>[]) {
   const terminals: TNode<ContentType>[] = [];
   nodes.forEach((v) => {
-    if (!edges.find((e) => v === e.ancestry)) terminals.push(v);
+    if (!edges.find((e) => v.name === e.ancestry?.name)) terminals.push(v);
   })
   return terminals;
 }
@@ -20,7 +20,7 @@ export function getTerminals<ContentType, EdgeType> (edges: ITEdge<ContentType, 
 export function getEntries<ContentType, EdgeType> (edges: ITEdge<ContentType, EdgeType>[], nodes: TNode<ContentType, EdgeType>[]) {
   const entries: TNode<ContentType>[] = [];
   nodes.forEach((v) => {
-    if (!edges.find((e) => v === e.descendant)) entries.push(v);
+    if (!edges.find((e) => v.name === e.descendant?.name)) entries.push(v);
   })
   return entries;
 }

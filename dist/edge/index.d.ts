@@ -9,7 +9,7 @@ export interface ITEdge<ContentType, EdgeType> {
 declare class TEdge<ContentType, EdgeType = {}> implements ITEdge<ContentType, EdgeType> {
     private _name;
     get name(): string;
-    set name(v: string);
+    set name(name: string);
     private _index?;
     get index(): number | undefined;
     set index(n: number | undefined);
