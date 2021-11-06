@@ -2,7 +2,7 @@
   "name": "@cybaj/tgraph",
   "version": "0.0.1",
   "description": "graph for th",
-  "main": "dist/index.ts",
+  "main": "./dist/index.ts",
   "types": "dist/index.d.ts",
   "repository": "https://github.com/cybaj/tgraph.git",
   "author": "cybaj",

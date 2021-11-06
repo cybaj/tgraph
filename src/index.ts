@@ -1,8 +1,8 @@
-import TGraph from "./src/graph"
-import TNode from "./src/node"
-import TEdge from "./src/edge"
+import TGraph from "./graph"
+import TNode from "./node"
+import TEdge from "./edge"
 
-import {getEntries as gE, getTerminals as gT} from "./src/utils"
+import {getEntries as gE, getTerminals as gT} from "./utils"
 
 export const Graph = TGraph;
 export const Node = TNode;
