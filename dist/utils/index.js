@@ -8,7 +8,7 @@ exports.getEntries = exports.getTerminals = void 0;
 function getTerminals(edges, nodes) {
     const terminals = [];
     nodes.forEach((v) => {
-        if (!edges.find((e) => v === e.ancestry))
+        if (!edges.find((e) => { var _a; return v.name === ((_a = e.ancestry) === null || _a === void 0 ? void 0 : _a.name); }))
             terminals.push(v);
     });
     return terminals;
@@ -21,7 +21,7 @@ exports.getTerminals = getTerminals;
 function getEntries(edges, nodes) {
     const entries = [];
     nodes.forEach((v) => {
-        if (!edges.find((e) => v === e.descendant))
+        if (!edges.find((e) => { var _a; return v.name === ((_a = e.descendant) === null || _a === void 0 ? void 0 : _a.name); }))
             entries.push(v);
     });
     return entries;

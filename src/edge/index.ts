@@ -2,7 +2,10 @@ import type TNode from "../node"
 export const FROM = "&&"
 
 export interface ITEdge<ContentType, EdgeType> {
-  name: string, ancestry?: TNode<ContentType, EdgeType>, descendant?: TNode<ContentType, EdgeType>, index?: number;
+  name: string, 
+  ancestry?: TNode<ContentType, EdgeType>, 
+  descendant?: TNode<ContentType, EdgeType>, 
+  index?: number;
 }
 
 class TEdge<ContentType, EdgeType = {}> implements ITEdge<ContentType, EdgeType> {
@@ -11,8 +14,8 @@ class TEdge<ContentType, EdgeType = {}> implements ITEdge<ContentType, EdgeType>
     public get name(): string {
         return this._name;
     }
-    public set name(v: string) {
-        this._name = v;
+    public set name(name: string) {
+        this._name = name;
     }
 
     // Index of the edge.
