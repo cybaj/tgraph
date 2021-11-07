@@ -27,26 +27,6 @@ class Graph {
         // this._adjMatrix = []; // [TODO] adjacency matrix
         this._nodes = [];
     }
-    initGraph(newTNodeOrArr) {
-        // We will keep the implementation simple and focus on the concepts
-        if ((newTNodeOrArr === null || newTNodeOrArr === void 0 ? void 0 : newTNodeOrArr.length) > 0) {
-            const newTNodeArr = newTNodeOrArr;
-            this._nodes.concat(newTNodeArr);
-        }
-        if (newTNodeOrArr === null || newTNodeOrArr === void 0 ? void 0 : newTNodeOrArr.name) {
-            const newTNode = newTNodeOrArr;
-            // If the tnode already exists in edges, do nothing.
-            if (this._adjList.find((e) => e.name.endsWith(edge_1.FROM + newTNode.name))) {
-                return true;
-            }
-            // If the tnode already exists, do nothing.
-            if (this._nodes.find((n) => n.name === newTNode.name)) {
-                return true;
-            }
-            this._nodes.push(newTNode);
-        }
-        return true;
-    }
     /**
      * Adds an edge to the graph.
      */
@@ -102,6 +82,35 @@ class Graph {
             (!this._adjList.find((e) => e.name.endsWith(edge_1.FROM + ancestry.name))
                 && !(this._adjList.find((e) => e.name.startsWith(ancestry.name + edge_1.FROM))))) {
             this._nodes.filter((v) => v !== ancestry);
+        }
+        return true;
+    }
+    initGraph(newTNodeOrTNodes, newEdges) {
+        // We will keep the implementation simple and focus on the concepts
+        if ((newTNodeOrTNodes === null || newTNodeOrTNodes === void 0 ? void 0 : newTNodeOrTNodes.length) > 0) {
+            const newTNodes = newTNodeOrTNodes;
+            const filteredNodes = newTNodes.filter(candidateNode => this._nodes.some(alreadyNode => alreadyNode.name === candidateNode.name));
+            this._nodes.concat(filteredNodes);
+        }
+        if (newTNodeOrTNodes === null || newTNodeOrTNodes === void 0 ? void 0 : newTNodeOrTNodes.name) {
+            const newTNode = newTNodeOrTNodes;
+            // If the tnode already exists in edges, do nothing.
+            if (this._adjList.find((e) => e.name.endsWith(edge_1.FROM + newTNode.name))) {
+                return true;
+            }
+            // If the tnode already exists, do nothing.
+            if (this._nodes.find((n) => n.name === newTNode.name)) {
+                return true;
+            }
+            this._nodes.push(newTNode);
+        }
+        // assumed that graph had no edges
+        if (newEdges) {
+            newEdges.forEach(newEdge => {
+                if (newEdge.descendant && newEdge.ancestry) {
+                    this.addAnEdge(newEdge.descendant, newEdge.ancestry);
+                }
+            });
         }
         return true;
     }
