@@ -82,8 +82,8 @@ class Graph<ContentType, EdgeType> {
 
     /**
      */
-    initGraph(newTNode: TNode<ContentType, EdgeType>): boolean;
-    initGraph(newTNodes: TNode<ContentType, EdgeType>[]): boolean;
+    initGraph(newTNode: TNode<ContentType, EdgeType>, newEdges?: TEdge<ContentType, EdgeType>[]): boolean;
+    initGraph(newTNodes: TNode<ContentType, EdgeType>[], newEdges?: TEdge<ContentType, EdgeType>[]): boolean;
     initGraph(newTNodeOrTNodes: any, newEdges?: TEdge<ContentType, EdgeType>[]): boolean {
         // We will keep the implementation simple and focus on the concepts
 
