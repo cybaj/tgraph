@@ -7,11 +7,13 @@ class Graph<ContentType, EdgeType> {
     private _adjList: TEdge<ContentType, EdgeType>[];
     // private _adjMatrix: boolean[][];
     private _nodes: TNode<ContentType, EdgeType>[];
+    public isBuilded: boolean;
 
     constructor() {
         this._adjList = [];
         // this._adjMatrix = []; // [TODO] adjacency matrix
         this._nodes = [];
+        this.isBuilded = false;
     }
 
     /**
@@ -82,9 +84,9 @@ class Graph<ContentType, EdgeType> {
 
     /**
      */
-    initGraph(newTNode: TNode<ContentType, EdgeType>, newEdges?: TEdge<ContentType, EdgeType>[]): boolean;
-    initGraph(newTNodes: TNode<ContentType, EdgeType>[], newEdges?: TEdge<ContentType, EdgeType>[]): boolean;
-    initGraph(newTNodeOrTNodes: any, newEdges?: TEdge<ContentType, EdgeType>[]): boolean {
+    buildGraph(newTNode: TNode<ContentType, EdgeType>, newEdges?: TEdge<ContentType, EdgeType>[]): boolean;
+    buildGraph(newTNodes: TNode<ContentType, EdgeType>[], newEdges?: TEdge<ContentType, EdgeType>[]): boolean;
+    buildGraph(newTNodeOrTNodes: any, newEdges?: TEdge<ContentType, EdgeType>[]): boolean {
         // We will keep the implementation simple and focus on the concepts
 
         if (newTNodeOrTNodes?.length > 0) {
@@ -116,9 +118,9 @@ class Graph<ContentType, EdgeType> {
             }
           })
         }
+        this.isBuilded = true;
         return true;
     }
-
 }
 
 export default Graph;

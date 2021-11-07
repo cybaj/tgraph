@@ -3,6 +3,7 @@ import TEdge from '../edge';
 declare class Graph<ContentType, EdgeType> {
     private _adjList;
     private _nodes;
+    isBuilded: boolean;
     constructor();
     /**
      * Adds an edge to the graph.
@@ -16,7 +17,7 @@ declare class Graph<ContentType, EdgeType> {
     removeAnEdge(descendant: TNode<ContentType, EdgeType>, ancestry: TNode<ContentType, EdgeType>): boolean;
     /**
      */
-    initGraph(newTNode: TNode<ContentType, EdgeType>, newEdges?: TEdge<ContentType, EdgeType>[]): boolean;
-    initGraph(newTNodes: TNode<ContentType, EdgeType>[], newEdges?: TEdge<ContentType, EdgeType>[]): boolean;
+    buildGraph(newTNode: TNode<ContentType, EdgeType>, newEdges?: TEdge<ContentType, EdgeType>[]): boolean;
+    buildGraph(newTNodes: TNode<ContentType, EdgeType>[], newEdges?: TEdge<ContentType, EdgeType>[]): boolean;
 }
 export default Graph;

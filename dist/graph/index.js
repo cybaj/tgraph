@@ -26,6 +26,7 @@ class Graph {
         this._adjList = [];
         // this._adjMatrix = []; // [TODO] adjacency matrix
         this._nodes = [];
+        this.isBuilded = false;
     }
     /**
      * Adds an edge to the graph.
@@ -85,7 +86,7 @@ class Graph {
         }
         return true;
     }
-    initGraph(newTNodeOrTNodes, newEdges) {
+    buildGraph(newTNodeOrTNodes, newEdges) {
         // We will keep the implementation simple and focus on the concepts
         if ((newTNodeOrTNodes === null || newTNodeOrTNodes === void 0 ? void 0 : newTNodeOrTNodes.length) > 0) {
             const newTNodes = newTNodeOrTNodes;
@@ -112,6 +113,7 @@ class Graph {
                 }
             });
         }
+        this.isBuilded = true;
         return true;
     }
 }
