@@ -1,7 +1,7 @@
 import type TNode from "../node";
 export declare const FROM = "&&";
 export interface ITEdge<NodeContentType, EdgeType, EdgeContentType> {
-    name: string;
+    name?: string;
     ancestry?: TNode<NodeContentType, EdgeType>;
     descendant?: TNode<NodeContentType, EdgeType>;
     content?: EdgeContentType;
