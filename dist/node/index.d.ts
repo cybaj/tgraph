@@ -1,7 +1,7 @@
 export declare class TNode<ContentType, EdgeType = {}> {
     private _name;
     get name(): string;
-    set name(v: string);
+    set name(name: string);
     private _category;
     get category(): string | undefined;
     set category(v: string | undefined);

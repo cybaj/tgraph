@@ -15,8 +15,8 @@ class TNode {
     get name() {
         return this._name;
     }
-    set name(v) {
-        this._name = v;
+    set name(name) {
+        this._name = name;
     }
     get category() {
         if (this._category)

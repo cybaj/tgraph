@@ -7,39 +7,13 @@ class Graph<ContentType, EdgeType> {
     private _adjList: TEdge<ContentType, EdgeType>[];
     // private _adjMatrix: boolean[][];
     private _nodes: TNode<ContentType, EdgeType>[];
+    public isBuilded: boolean;
 
     constructor() {
         this._adjList = [];
         // this._adjMatrix = []; // [TODO] adjacency matrix
         this._nodes = [];
-    }
-
-    /**
-     */
-    initGraph(newTNode: TNode<ContentType, EdgeType>): boolean;
-    initGraph(newTNodeArr?: TNode<ContentType, EdgeType>[]): boolean;
-    initGraph(newTNodeOrArr: any): boolean {
-        // We will keep the implementation simple and focus on the concepts
-
-        if (newTNodeOrArr?.length > 0) {
-          const newTNodeArr = newTNodeOrArr;
-          this._nodes.concat(newTNodeArr);
-        }
-        if (newTNodeOrArr?.name) {
-          const newTNode = newTNodeOrArr;
-          // If the tnode already exists in edges, do nothing.
-          if (this._adjList.find((e) => e.name.endsWith(FROM + newTNode.name))) {
-              return true;
-          }
-          
-          // If the tnode already exists, do nothing.
-          if (this._nodes.find((n) => n.name === newTNode.name)) {
-              return true;
-          }
-
-          this._nodes.push(newTNode);
-          }
-        return true;
+        this.isBuilded = false;
     }
 
     /**
@@ -105,6 +79,46 @@ class Graph<ContentType, EdgeType> {
             this._nodes.filter((v) => v !== ancestry);
         }
 
+        return true;
+    }
+
+    /**
+     */
+    buildGraph(newTNode: TNode<ContentType, EdgeType>, newEdges?: TEdge<ContentType, EdgeType>[]): boolean;
+    buildGraph(newTNodes: TNode<ContentType, EdgeType>[], newEdges?: TEdge<ContentType, EdgeType>[]): boolean;
+    buildGraph(newTNodeOrTNodes: any, newEdges?: TEdge<ContentType, EdgeType>[]): boolean {
+        // We will keep the implementation simple and focus on the concepts
+
+        if (newTNodeOrTNodes?.length > 0) {
+          const newTNodes = newTNodeOrTNodes as TNode<ContentType, EdgeType>[]
+          const filteredNodes = newTNodes.filter(candidateNode => 
+            this._nodes.some(alreadyNode =>
+            alreadyNode.name === candidateNode.name))
+          this._nodes.concat(filteredNodes)
+        }
+        if (newTNodeOrTNodes?.name) {
+          const newTNode = newTNodeOrTNodes;
+          // If the tnode already exists in edges, do nothing.
+          if (this._adjList.find((e) => e.name.endsWith(FROM + newTNode.name))) {
+              return true;
+          }
+          
+          // If the tnode already exists, do nothing.
+          if (this._nodes.find((n) => n.name === newTNode.name)) {
+              return true;
+          }
+
+          this._nodes.push(newTNode);
+        }
+        // assumed that graph had no edges
+        if (newEdges) {
+          newEdges.forEach(newEdge => {
+            if (newEdge.descendant && newEdge.ancestry) {
+              this.addAnEdge(newEdge.descendant, newEdge.ancestry);
+            }
+          })
+        }
+        this.isBuilded = true;
         return true;
     }
 }

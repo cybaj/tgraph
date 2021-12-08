@@ -1,12 +1,10 @@
 import TNode from '../node';
+import TEdge from '../edge';
 declare class Graph<ContentType, EdgeType> {
     private _adjList;
     private _nodes;
+    isBuilded: boolean;
     constructor();
-    /**
-     */
-    initGraph(newTNode: TNode<ContentType, EdgeType>): boolean;
-    initGraph(newTNodeArr?: TNode<ContentType, EdgeType>[]): boolean;
     /**
      * Adds an edge to the graph.
      */
@@ -17,5 +15,9 @@ declare class Graph<ContentType, EdgeType> {
      * @param tnode2 ANother tnode of an edge to be removed
      */
     removeAnEdge(descendant: TNode<ContentType, EdgeType>, ancestry: TNode<ContentType, EdgeType>): boolean;
+    /**
+     */
+    buildGraph(newTNode: TNode<ContentType, EdgeType>, newEdges?: TEdge<ContentType, EdgeType>[]): boolean;
+    buildGraph(newTNodes: TNode<ContentType, EdgeType>[], newEdges?: TEdge<ContentType, EdgeType>[]): boolean;
 }
 export default Graph;
