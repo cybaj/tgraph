@@ -7,10 +7,11 @@ class TEdge {
      * Creates a new vertex with empty edges.
      * @param TNName Name of the node
      */
-    constructor(descendant, ancestry) {
+    constructor(descendant, ancestry, content) {
         this._name = descendant.name + exports.FROM + ancestry.name;
         this._descendant = descendant;
         this._ancestry = ancestry;
+        this._content = content;
     }
     get name() {
         return this._name;
@@ -25,6 +26,14 @@ class TEdge {
     }
     set index(n) {
         this._index = n;
+    }
+    get content() {
+        if (this._content)
+            return this._content;
+        return undefined;
+    }
+    set content(n) {
+        this._content = n;
     }
     get ancestry() {
         if (this._ancestry)

@@ -5,7 +5,7 @@ import type {TNode} from "../node"
  * assumed no circular
  * assumed terminals have no "descendant"
  */
-export function getTerminals<ContentType, EdgeType> (edges: ITEdge<ContentType, EdgeType>[], nodes: TNode<ContentType, EdgeType>[]) {
+export function getTerminals<ContentType, EdgeType, EdgeContentType> (edges: ITEdge<ContentType, EdgeType, EdgeContentType>[], nodes: TNode<ContentType, EdgeType>[]) {
   const terminals: TNode<ContentType>[] = [];
   nodes.forEach((v) => {
     if (!edges.find((e) => v.name === e.ancestry?.name)) terminals.push(v);
@@ -17,7 +17,7 @@ export function getTerminals<ContentType, EdgeType> (edges: ITEdge<ContentType, 
  * assumed no circular
  * assumed entries have no "ancestry"
  */
-export function getEntries<ContentType, EdgeType> (edges: ITEdge<ContentType, EdgeType>[], nodes: TNode<ContentType, EdgeType>[]) {
+export function getEntries<ContentType, EdgeType, EdgeContentType> (edges: ITEdge<ContentType, EdgeType, EdgeContentType>[], nodes: TNode<ContentType, EdgeType>[]) {
   const entries: TNode<ContentType>[] = [];
   nodes.forEach((v) => {
     if (!edges.find((e) => v.name === e.descendant?.name)) entries.push(v);
