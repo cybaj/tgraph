@@ -9,7 +9,7 @@ export interface ITEdge<NodeContentType, EdgeType, EdgeContentType> {
   index?: number;
 }
 
-class TEdge<NodeContentType, EdgeType = {}, EdgeContentType = {}> implements ITEdge<NodeContentType, EdgeType, EdgeContentType> {
+class TEdge<NodeContentType, EdgeType, EdgeContentType> implements ITEdge<NodeContentType, EdgeType, EdgeContentType> {
     // Name of the edge.
     private _name: string;
     public get name(): string {

@@ -2,11 +2,27 @@ import TNode from '../node';
 import TEdge, {FROM} from '../edge';
 
 // [TODO] add getNodes and getEdges
-class Graph<ContentType, EdgeType> {
+class Graph<ContentType, EdgeType, EdgeContentType> {
     // An adjacency list to hold our graph data
-    private _adjList: TEdge<ContentType, EdgeType>[];
-    // private _adjMatrix: boolean[][];
+    private _adjList: TEdge<ContentType, EdgeType, EdgeContentType>[];
+   // Edges associated with the node
+    public get adjList(): TEdge<ContentType, EdgeType, EdgeContentType>[] {
+        return this._adjList;
+    }
+    public set adjList(v: TEdge<ContentType, EdgeType, EdgeContentType>[]) {
+        this._adjList = v;
+    }
+    /*
+      private _adjMatrix: boolean[][];
+    */
+  
     private _nodes: TNode<ContentType, EdgeType>[];
+    public get nodes(): TNode<ContentType, EdgeType>[] {
+        return this._nodes;
+    }
+    public set nodes(v: TNode<ContentType, EdgeType>[]) {
+        this._nodes = v;
+    }
     public isBuilded: boolean;
 
     constructor() {
@@ -15,7 +31,8 @@ class Graph<ContentType, EdgeType> {
         this._nodes = [];
         this.isBuilded = false;
     }
-
+  
+ 
     /**
      * Adds an edge to the graph.
      */
@@ -84,9 +101,9 @@ class Graph<ContentType, EdgeType> {
 
     /**
      */
-    buildGraph(newTNode: TNode<ContentType, EdgeType>, newEdges?: TEdge<ContentType, EdgeType>[]): boolean;
-    buildGraph(newTNodes: TNode<ContentType, EdgeType>[], newEdges?: TEdge<ContentType, EdgeType>[]): boolean;
-    buildGraph(newTNodeOrTNodes: any, newEdges?: TEdge<ContentType, EdgeType>[]): boolean {
+    buildGraph(newTNode: TNode<ContentType, EdgeType>, newEdges?: TEdge<ContentType, EdgeType, EdgeContentType>[]): boolean;
+    buildGraph(newTNodes: TNode<ContentType, EdgeType>[], newEdges?: TEdge<ContentType, EdgeType, EdgeContentType>[]): boolean;
+    buildGraph(newTNodeOrTNodes: any, newEdges?: TEdge<ContentType, EdgeType, EdgeContentType>[]): boolean {
         // We will keep the implementation simple and focus on the concepts
 
         if (newTNodeOrTNodes?.length > 0) {
