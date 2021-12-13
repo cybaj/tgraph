@@ -32,6 +32,14 @@ class Graph<ContentType, EdgeType, EdgeContentType> {
         this.isBuilded = false;
     }
   
+
+    /**
+     * Add an node under or uppon the node.
+     */
+    // [TODO]
+    addAnNode(newNode: TNode<ContentType, EdgeType>, name: string, type="down"): boolean {
+      return !newNode && !name && !type
+    }
  
     /**
      * Adds an edge to the graph.
