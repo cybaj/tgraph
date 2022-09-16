@@ -7,7 +7,7 @@ export interface ITEdge<NodeContentType, EdgeType, EdgeContentType> {
     content?: EdgeContentType;
     index?: number;
 }
-declare class TEdge<NodeContentType, EdgeType = {}, EdgeContentType = {}> implements ITEdge<NodeContentType, EdgeType, EdgeContentType> {
+declare class TEdge<NodeContentType, EdgeType, EdgeContentType> implements ITEdge<NodeContentType, EdgeType, EdgeContentType> {
     private _name;
     get name(): string;
     set name(name: string);

@@ -28,6 +28,26 @@ class Graph {
         this._nodes = [];
         this.isBuilded = false;
     }
+    // Edges associated with the node
+    get adjList() {
+        return this._adjList;
+    }
+    set adjList(v) {
+        this._adjList = v;
+    }
+    get nodes() {
+        return this._nodes;
+    }
+    set nodes(v) {
+        this._nodes = v;
+    }
+    /**
+     * Add an node under or uppon the node.
+     */
+    // [TODO]
+    addAnNode(newNode, name, type = "down") {
+        return !newNode && !name && !type;
+    }
     /**
      * Adds an edge to the graph.
      */
