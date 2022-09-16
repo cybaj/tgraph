@@ -21,7 +21,7 @@ export function getTerminals<ContentType, EdgeType, EdgeContentType> (edges: ITE
  * assumed entries have no "ancestry"
  */
 export function getEntries<ContentType, EdgeType, EdgeContentType> (edges: ITEdge<ContentType, EdgeType, EdgeContentType>[], nodes: TNode<ContentType, EdgeType>[]) {
-  const entries: TNode<ContentType>[] = [];
+  const entries: TNode<ContentType, EdgeType>[] = [];
   if (nodes.length === 0) return entries
   if (nodes.length === 1 && nodes[0]) entries.push(nodes[0])
   nodes.forEach((v) => {
